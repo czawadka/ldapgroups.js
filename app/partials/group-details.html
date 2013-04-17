@@ -1,0 +1,16 @@
+<h1>{{group.name}}</h1>
+
+<dl>
+    <dt>Last Modified</dt>
+    <dd>{{group.dateModified | date:'medium'}}</dd>
+</dl>
+
+<dl>
+    <dt>Synchronized</dt>
+    <dd>{{group.dateSynchronized | date:'medium'}}</dd>
+</dl>
+
+<dl>
+    <dt>Members</dt>
+    <dd ng-repeat="member in group.members">{{member}}</dd>
+</dl>

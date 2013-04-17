@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered table-condensed">
+<table class="table table-bordered table-condensed table-hover">
     <thead>
     <tr>
         <th>Name</th>
@@ -8,7 +8,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="group in groups">
-        <td>{{group.name}}</td>
+        <td><a href="#/group/{{group.name}}">{{group.name}}</a></a></td>
         <td>{{group.dateModified | date:'medium'}}</td>
         <td>{{group.dateSynchronized | date:'medium'}}</td>
     </tr>
