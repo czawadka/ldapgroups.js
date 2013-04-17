@@ -16,9 +16,10 @@ module.directive('activeLinkClass', ['$location', function($location) {
             //var path = attrs.href;
             var path = (element.tagName=='A' ? element : element.find('A')).attr('href');
             path = path.substring(1); //hack because path does bot return including hashbang
+            var rePath = new RegExp("^"+path);
             scope.location = $location;
             scope.$watch('location.path()', function(newPath) {
-                if (path === newPath) {
+                if (rePath.test(newPath)) {
                     element.addClass(clazz);
                 } else {
                     element.removeClass(clazz);
