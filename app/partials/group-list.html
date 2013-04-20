@@ -8,7 +8,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="group in groups">
-        <td><a href="#/group/{{group.name}}">{{group.name}}</a></a></td>
+        <td><a href="#/group/{{group.name | escape}}">{{group.name}}</a></a></td>
         <td>{{group.dateModified | date:'medium'}}</td>
         <td>{{group.dateSynchronized | date:'medium'}}</td>
     </tr>
