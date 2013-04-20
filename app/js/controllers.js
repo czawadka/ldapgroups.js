@@ -9,4 +9,7 @@ angular.module('myApp.controllers', ['myApp.services'])
     .controller('GroupCtrl', ['$scope', '$routeParams', 'Group', function($scope, $routeParams, Group) {
         $scope.group = Group.get({groupName: $routeParams.groupName});
     }])
+    .controller('NotFoundCtrl', ['$scope', '$location', function($scope, $location) {
+        $scope.$location = $location;
+    }])
 ;

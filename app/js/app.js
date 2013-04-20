@@ -6,5 +6,5 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/group', {templateUrl: 'partials/group-list.html', controller: 'GroupsCtrl'});
     $routeProvider.when('/group/:groupName', {templateUrl: 'partials/group-details.html', controller: 'GroupCtrl'});
-    $routeProvider.otherwise({redirectTo: '/group'});
+    $routeProvider.otherwise({templateUrl: 'partials/error-notfound.html', controller: 'NotFoundCtrl'});
   }]);
