@@ -1,4 +1,5 @@
 [
     {"name": "group1", "dateModified": "1288323623006", "dateSynchronized": null, "members": []},
-    {"name": "group2", "dateModified": "", "dateSynchronized": null, "members": ["user1", "user2", "user3"]}
+    {"name": "group2", "dateModified": "", "dateSynchronized": null, "members": ["user1", "user2", "user3"]},
+    {"name": "groupX", "dateModified": "1188323623006", "dateSynchronized": null, "members": ["userY", "userZ"]}
 ]

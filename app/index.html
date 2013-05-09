@@ -33,7 +33,13 @@
 <div class="container">
   <div breadcrumbs></div>
 
-  <div ng-view></div>
+  <div class="alert alert-error" ng-show="errorResponse">
+    Error {{errorResponse.status}} accessing {{errorResponse.config.url}}
+
+    <div ng-bind-html-unsafe="errorResponse.data"></div>
+  </div>
+
+  <div ng-view ng-show="!errorResponse"></div>
 </div>
 
 <div class="container">

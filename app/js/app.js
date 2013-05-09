@@ -9,6 +9,23 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
         $routeProvider.when('', {redirectTo: '/group'});
         $routeProvider.otherwise({templateUrl: 'partials/error-notfound.html', controller: 'NotFoundCtrl'});
     }])
+    .config(['$httpProvider', function ($httpProvider) {
+        var interceptor = ['$q', '$rootScope', function ($q, $rootScope) {
+                function success(response) {
+                    return response;
+                }
+                function error(response) {
+                    $rootScope.errorResponse = response;
+                    return $q.reject(response);
+                }
+                return function (promise) {
+                    $rootScope.errorResponse = null;
+                    return promise.then(success, error);
+                }
+            }];
+
+        $httpProvider.responseInterceptors.push(interceptor);
+    }])
     .factory('MainBreadcrumbs', ['Breadcrumbs', function(Breadcrumbs) {
         var base = Breadcrumbs.get();
         var extra = {
