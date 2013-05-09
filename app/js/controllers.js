@@ -12,7 +12,7 @@ angular.module('myApp.controllers', ['myApp.services'])
             MainBreadcrumbs.group($scope.group.name);
         });
     }])
-    .controller('NotFoundCtrl', ['$scope', '$location', function($scope, $location) {
+    .controller('NotFoundCtrl', ['$scope', '$location', 'MainBreadcrumbs', function($scope, $location, MainBreadcrumbs) {
         $scope.$location = $location;
         MainBreadcrumbs.notFound();
     }])

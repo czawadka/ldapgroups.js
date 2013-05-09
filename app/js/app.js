@@ -24,7 +24,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
             },
             notFound: function() {
                 return this.beginUpdate()
-                    .start().push('#/notFound', "Not found")
+                    .clear().push('#/notFound', "Not found")
                     .endUpdate();
             }};
         return angular.extend(extra, base);
