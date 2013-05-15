@@ -14,3 +14,10 @@
     </tr>
     </tbody>
 </table>
+
+<div>
+  <form name="form1">
+    <input type="text" ng-model="groupName" required>
+    <button ng-click="addGroup()" ng-disabled="form1.$invalid">Add</button>
+  </form>
+</div>
