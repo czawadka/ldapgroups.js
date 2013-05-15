@@ -4,9 +4,9 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers', 'breadcrumbs'])
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/group', {templateUrl: 'partials/group-list.html', controller: 'GroupsCtrl'});
-        $routeProvider.when('/group/:groupName', {templateUrl: 'partials/group-details.html', controller: 'GroupCtrl'});
-        $routeProvider.when('', {redirectTo: '/group'});
+        $routeProvider.when('/groups', {templateUrl: 'partials/group-list.html', controller: 'GroupsCtrl'});
+        $routeProvider.when('/groups/:groupName', {templateUrl: 'partials/group-details.html', controller: 'GroupCtrl'});
+        $routeProvider.when('', {redirectTo: '/groups'});
         $routeProvider.otherwise({templateUrl: 'partials/error-notfound.html', controller: 'NotFoundCtrl'});
     }])
     .factory('MainBreadcrumbs', ['Breadcrumbs', function(Breadcrumbs) {
