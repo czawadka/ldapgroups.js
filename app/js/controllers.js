@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', ['myApp.services'])
+angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
     .controller('GroupsCtrl', ['$scope', 'Group', 'MainBreadcrumbs', function($scope, Group, MainBreadcrumbs) {
         $scope.groups = Group.query();
         MainBreadcrumbs.groups();

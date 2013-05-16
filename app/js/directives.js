@@ -2,7 +2,7 @@
 
 /* Directives */
 
-var module = angular.module('myApp.directives', []);
+var module = angular.module('ldapgroupsDirectives', []);
 module.directive('appVersion', ['version', function(version) {
     return function(scope, elm, attrs) {
       elm.text(version);

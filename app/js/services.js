@@ -5,7 +5,7 @@
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-var myAppServices = angular.module('myApp.services', ['ngResource'])
+var ldapgroupsServices = angular.module('ldapgroupsServices', ['ngResource'])
     .value('version', '0.1')
     .value('groupUrl', 'api/groups/:groupName')
     .value('groupListParams', {groupName:''})

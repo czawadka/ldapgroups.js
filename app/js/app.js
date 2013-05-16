@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers', 'breadcrumbs'])
+angular.module('ldapgroups', ['ldapgroupsFilters', 'ldapgroupsServices', 'ldapgroupsDirectives', 'ldapgroupsControllers', 'breadcrumbs'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/groups', {templateUrl: 'partials/group-list.html', controller: 'GroupsCtrl'});
         $routeProvider.when('/groups/:groupName', {templateUrl: 'partials/group-details.html', controller: 'GroupCtrl'});
