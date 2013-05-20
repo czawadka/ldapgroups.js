@@ -11,6 +11,7 @@
         <td><a href="#{{paths.groups}}/{{group.name | escape}}">{{group.name}}</a></a></td>
         <td>{{group.dateModified | date:'medium'}}</td>
         <td>{{group.dateSynchronized | date:'medium'}}</td>
+        <td><button ng-click="removeGroup(group)">Remove</button></td>
     </tr>
     </tbody>
 </table>
