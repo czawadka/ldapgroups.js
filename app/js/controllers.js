@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
-    .controller('GroupsCtrl', ['$scope', 'Group', 'MainBreadcrumbs', '$log', function($scope, Group, MainBreadcrumbs, $log) {
+    .controller('GroupsCtrl', ['$scope', 'Group', 'MainBreadcrumbs', 'Flash', function($scope, Group, MainBreadcrumbs, Flash) {
         $scope.groups = Group.query();
         MainBreadcrumbs.groups();
 
@@ -12,9 +12,10 @@ angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
                 function(newGroup) {
                     $scope.groups.push(newGroup);
                     $scope.groupName = "";
+                    Flash.success("New group "+newGroup.name+" has been added");
                 },
                 function(response) {
-                    $log.log( response, "error adding group" );
+                    Flash.error("Error adding group "+angular.toJson(response));
                 });
         };
 
@@ -25,9 +26,10 @@ angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
                     if (idx>=0) {
                         $scope.groups.splice(idx, 1);
                     }
+                    Flash.info("Group "+group.name+" has been removed");
                 },
                 function(response) {
-                    $log.log( "error removing group: "+response );
+                    Flash.error("Error removing group "+angular.toJson(response));
                 });
         };
     }])

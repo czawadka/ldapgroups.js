@@ -33,6 +33,10 @@
 <div class="container">
   <div breadcrumbs></div>
 
+  <div flash ng-show="flash.type">
+    <alert type="flash.type" close="flash.$clear()">{{flash.message}}</alert>
+  </div>
+
   <div ng-view></div>
 </div>
 
@@ -54,5 +58,7 @@
   <script src="js/directives.js"></script>
   <script src="lib/angular/angular-resource.js"></script>
   <script src="js/breadcrumbs.js"></script>
+  <script src="js/flash.js"></script>
+  <script src="lib/angular-ui/ui-bootstrap-tpls-0.3.0.js"></script>
 </body>
 </html>
