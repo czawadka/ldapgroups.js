@@ -38,8 +38,10 @@ angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
     .controller('GroupCtrl', ['$scope', '$routeParams', 'Group', 'MainBreadcrumbs', 'Flash',
         function($scope, $routeParams, Group, MainBreadcrumbs, Flash) {
 
-        $scope.group = Group.get({groupName: $routeParams.groupName});
-        MainBreadcrumbs.group($routeParams.groupName);
+        var groupName = $routeParams.groupName;
+        groupName = decodeURIComponent(groupName); // decode again because it was double encoded to remove '/' problem
+        $scope.group = Group.get({"groupName": groupName});
+        MainBreadcrumbs.group(groupName);
 
         $scope.addMember = function() {
             var updatedGroup = angular.extend($scope.group);

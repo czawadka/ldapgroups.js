@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="group in groups">
-        <td><a href="#{{paths.groups}}/{{group.name | escape}}">{{group.name}}</a></a></td>
+        <td><a ng-href="#{{paths.groups}}/{{group.name | encodeURIComponent | encodeURIComponent}}">{{group.name}}</a></a></td>
         <td ng-bind-html="group | dateModified"></td>
         <td ng-bind-html="group | dateSynchronized"></td>
         <td><button ng-click="removeGroup(group)">Remove</button></td>
