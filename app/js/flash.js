@@ -29,6 +29,11 @@ var flashModule = angular.module('flash', [])
     .directive('flash', ['Flash', '$timeout', 'flashDuration', function (Flash, $timeout, flashDuration) {
         return {
             restrict: 'A',
+            template: '<div style="display: none" ng-show="visible">'
+                    +'<div alert type="flash.type" close="hide()"><div ng-transclude></div></div>'
+                +'</div>',
+            replace: true,
+            transclude: true,
             compile: function (tElement, tAttrs) {
                 return function ($scope, $elem, $attr) {
                     var timeout,

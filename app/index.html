@@ -33,9 +33,7 @@
 <div class="container">
   <div breadcrumbs></div>
 
-  <div flash style="display: none" ng-show="visible" ng-animate="'fade'">
-    <alert type="flash.type" close="hide()">{{flash.message}}</alert>
-  </div>
+  <div flash ng-animate="'fade'">{{flash.message}}</div>
 
   <div ng-view></div>
 </div>
