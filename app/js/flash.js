@@ -26,7 +26,7 @@ var flashModule = angular.module('flash', ['ui.bootstrap'])
         return actions;
     }])
     .value('flashDuration', 3000)
-    .directive('flash', ['Flash', '$timeout', 'flashDuration', function (Flash, $timeout, flashDuration) {
+    .directive('flash', ['$timeout', '$log', 'Flash', 'flashDuration', function ($timeout, $log, Flash, flashDuration) {
         return {
             restrict: 'A',
             template: '<div style="display: none" ng-show="visible">'
@@ -35,6 +35,13 @@ var flashModule = angular.module('flash', ['ui.bootstrap'])
             replace: true,
             transclude: true,
             compile: function (tElement, tAttrs) {
+                var duration = parseInt( tAttrs.duration, 10 );
+                if (isNaN(duration)) {
+                    if (tAttrs.duration) {
+                        $log.warn("Flash's 'duration' attribute has value '"+tAttrs.duration+"' which is not a number. Defaulting to "+flashDuration);
+                    }
+                    duration = flashDuration;
+                }
                 return function ($scope, $elem, $attr) {
                     var timeout,
                         reloadFlash = function() {
@@ -54,8 +61,8 @@ var flashModule = angular.module('flash', ['ui.bootstrap'])
                             }
                         },
                         setTimeout = function() {
-                            if (flashDuration) {
-                                timeout = $timeout(hideFlash, flashDuration);
+                            if (duration) {
+                                timeout = $timeout(hideFlash, duration);
                             }
                         }
                         ;
