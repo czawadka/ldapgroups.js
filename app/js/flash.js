@@ -1,6 +1,9 @@
-angular.module('flash', [])
+var flashModule = angular.module('flash', [])
     .factory('Flash', ["$rootScope", function($rootScope) {
-        var entry = {message: "", type: ""};
+        var entry = {
+            message: "",
+            type: ""
+        };
         var actions = {
             set: function(type, message) {
                 entry.message = message;
@@ -8,11 +11,7 @@ angular.module('flash', [])
                 $rootScope.$broadcast("flashChanged", this);
             },
             get: function() {
-                var self = this;
-                return angular.extend(entry, {$clear: function() {self.clear();}});
-            },
-            clear: function() {
-              this.set('', '');
+                return entry;
             },
             success: function(message) {
                 this.set("success", message);
@@ -26,31 +25,44 @@ angular.module('flash', [])
         };
         return actions;
     }])
-    .directive('flash', ['Flash', '$timeout', function (Flash, $timeout) {
+    .value('flashDuration', 3000)
+    .directive('flash', ['Flash', '$timeout', 'flashDuration', function (Flash, $timeout, flashDuration) {
         return {
             restrict: 'A',
             compile: function (tElement, tAttrs) {
                 return function ($scope, $elem, $attr) {
-                    var clearFlash = function() {
-                            $scope.flash = {};
-                            resetTimeout();
+                    var timeout,
+                        reloadFlash = function() {
+                            $scope.flash = Flash.get();
+                            $scope.visible = ($scope.flash.message != '');
+                            cancelTimeout();
+                            setTimeout();
                         },
-                        timeout,
-                        resetTimeout = function() {
+                        hideFlash = function() {
+                            $scope.visible = false;
+                            cancelTimeout();
+                        },
+                        cancelTimeout = function() {
                             if (timeout) {
                                 $timeout.cancel(timeout);
                                 timeout = null;
                             }
-                        };
+                        },
+                        setTimeout = function() {
+                            if (flashDuration) {
+                                timeout = $timeout(hideFlash, flashDuration);
+                            }
+                        }
+                        ;
                     $scope.$on('flashChanged', function(){
-                        $scope.flash = Flash.get();
-                        resetTimeout();
-                        timeout = $timeout(clearFlash, 5000);
+                        reloadFlash();
                     });
                     $scope.$on('$routeChangeSuccess', function(){
-                        clearFlash();
+                        hideFlash();
                     });
-                    clearFlash();
+
+                    $scope.hide = hideFlash;
+                    reloadFlash();
                 }
             }
         };
