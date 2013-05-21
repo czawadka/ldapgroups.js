@@ -53,3 +53,7 @@ body {
 .fade-show-setup.fade-show-start {
     opacity:1;
 }
+
+.cursor-click {
+    cursor: pointer;
+}

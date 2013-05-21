@@ -3,7 +3,9 @@
 /* Controllers */
 
 angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
-    .controller('GroupsCtrl', ['$scope', 'Group', 'MainBreadcrumbs', 'Flash', function($scope, Group, MainBreadcrumbs, Flash) {
+    .controller('GroupsCtrl', ['$scope', 'Group', 'MainBreadcrumbs', 'Flash',
+        function($scope, Group, MainBreadcrumbs, Flash) {
+
         $scope.groups = Group.query();
         MainBreadcrumbs.groups();
 
@@ -33,9 +35,41 @@ angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
                 });
         };
     }])
-    .controller('GroupCtrl', ['$scope', '$routeParams', 'Group', 'MainBreadcrumbs', function($scope, $routeParams, Group, MainBreadcrumbs) {
+    .controller('GroupCtrl', ['$scope', '$routeParams', 'Group', 'MainBreadcrumbs', 'Flash',
+        function($scope, $routeParams, Group, MainBreadcrumbs, Flash) {
+
         $scope.group = Group.get({groupName: $routeParams.groupName});
         MainBreadcrumbs.group($routeParams.groupName);
+
+        $scope.addMember = function() {
+            var updatedGroup = angular.extend($scope.group);
+            updatedGroup.members.push($scope.newMember);
+            updatedGroup.$save(
+                function(group) {
+                    Flash.success("New member "+$scope.newMember+" has been added");
+                    $scope.group = group;
+                    $scope.newMember = "";
+                },
+                function(response) {
+                    Flash.error("Error adding member: "+angular.toJson(response));
+                });
+        };
+
+        $scope.removeMember = function(member) {
+            var updatedGroup = angular.extend($scope.group);
+            var idx = updatedGroup.members.indexOf(member);
+            if (idx>=0) {
+                updatedGroup.members.splice(idx, 1);
+                updatedGroup.$save(
+                    function(group) {
+                        Flash.success("Member "+member+" has been removed");
+                        $scope.group = group;
+                    },
+                    function(response) {
+                        Flash.error("Error removing member: "+angular.toJson(response));
+                    });
+            }
+        };
     }])
     .controller('NotFoundCtrl', ['$scope', '$location', 'MainBreadcrumbs', function($scope, $location, MainBreadcrumbs) {
         $scope.$location = $location;
