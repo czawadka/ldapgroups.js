@@ -4,13 +4,14 @@
         <th>Name</th>
         <th>Modified</th>
         <th>Synchronized</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="group in groups">
         <td><a href="#{{paths.groups}}/{{group.name | escape}}">{{group.name}}</a></a></td>
-        <td>{{group.dateModified | date:'medium'}}</td>
-        <td>{{group.dateSynchronized | date:'medium'}}</td>
+        <td ng-bind-html="group | dateModified"></td>
+        <td ng-bind-html="group | dateSynchronized"></td>
         <td><button ng-click="removeGroup(group)">Remove</button></td>
     </tr>
     </tbody>
