@@ -13,12 +13,13 @@ module.directive('activeLinkClass', ['$location', function($location) {
         restrict: 'A',
         link: function(scope, element, attrs, controller) {
             var clazz = attrs.activeLinkClass;
-            //var path = attrs.href;
-            var path = (element.tagName=='A' ? element : element.find('A')).attr('href');
-            path = path.substring(1); //hack because path does bot return including hashbang
-            var rePath = new RegExp("^"+path);
             scope.location = $location;
+
             scope.$watch('location.path()', function(newPath) {
+                var path = (element.tagName=='A' ? element : element.find('A')).attr('href');
+                path = path.substring(1); //hack because path does bot return including hashbang
+                var rePath = new RegExp("^"+path);
+
                 if (rePath.test(newPath)) {
                     element.addClass(clazz);
                 } else {
