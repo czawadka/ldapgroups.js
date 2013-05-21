@@ -8,13 +8,15 @@
 
 <dl>
     <dt>Members</dt>
-    <dd ng-repeat="member in group.members"><i class="icon-remove cursor-click" ng-click="removeMember(member)"></i> {{member}}</dd>
+    <dd ng-repeat="member in group.members">
+      <i class="icon-remove cursor-click" ng-click="removeMember(member)"></i> {{member}}
+    </dd>
     <dd ng-hide="group.members"><em>No members yet</em></dd>
 </dl>
 
 <div>
   <form name="form1">
     <input type="text" ng-model="newMember" required>
-    <button ng-click="addMember()" ng-disabled="form1.$invalid">Add member</button>
+    <button ng-click="addMember()" ng-disabled="form1.$invalid">Add Member</button>
   </form>
 </div>
