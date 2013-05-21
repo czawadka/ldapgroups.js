@@ -1,4 +1,4 @@
-var flashModule = angular.module('flash', [])
+var flashModule = angular.module('flash', ['ui.bootstrap'])
     .factory('Flash', ["$rootScope", function($rootScope) {
         var entry = {
             message: "",
