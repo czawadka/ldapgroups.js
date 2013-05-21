@@ -54,6 +54,10 @@ var flashModule = angular.module('flash', ['ui.bootstrap'])
                             $scope.visible = false;
                             cancelTimeout();
                         },
+                        hideFlashImmediately = function() {
+                            $elem.css('display', 'none');
+                            hideFlash();
+                        },
                         cancelTimeout = function() {
                             if (timeout) {
                                 $timeout.cancel(timeout);
@@ -70,10 +74,10 @@ var flashModule = angular.module('flash', ['ui.bootstrap'])
                         reloadFlash();
                     });
                     $scope.$on('$routeChangeSuccess', function(){
-                        hideFlash();
+                        hideFlashImmediately();
                     });
 
-                    $scope.hide = hideFlash;
+                    $scope.hide = hideFlashImmediately;
                     reloadFlash();
                 }
             }
