@@ -23,7 +23,7 @@
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li active-link-class="active"><a href="#{{paths.groups}}">Groups</a></li>
-          <li active-link-class="active"><a href="#/view2">view2</a></li>
+          <li active-link-class="active"><a href="#{{paths.about}}">About</a></li>
         </ul>
       </div>
     </div>
@@ -33,7 +33,7 @@
 <div class="container">
   <div breadcrumbs></div>
 
-  <div flash duration="0" ng-animate="'fade'">{{flash.message}}</div>
+  <div flash duration="2500" ng-animate="'fade'">{{flash.message}}</div>
 
   <div ng-view></div>
 </div>

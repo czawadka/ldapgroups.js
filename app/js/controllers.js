@@ -77,4 +77,7 @@ angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
         $scope.$location = $location;
         MainBreadcrumbs.notFound();
     }])
+    .controller('AboutCtrl', ['MainBreadcrumbs', function(MainBreadcrumbs) {
+        MainBreadcrumbs.about();
+    }])
 ;

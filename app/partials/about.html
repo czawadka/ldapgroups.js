@@ -1,0 +1,34 @@
+<p>Update LDAP group members. Groups in LDAP must exist a priori, this service updates only members of added groups</p>
+
+<h1>API</h1>
+<table class="table table-bordered table-condensed table-hover">
+  <thead class="table-">
+    <tr>
+      <th>Method</th>
+      <th>Uri</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GET</td>
+      <td>/api/groups</td>
+      <td>List groups</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/api/groups</td>
+      <td>Create new group</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/api/groups/GROUP_NAME</td>
+      <td>Get existing group</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>/api/groups/GROUP_NAME</td>
+      <td>Set group. It creates a new one if group doesn't exist or updates members if group already exists</td>
+    </tr>
+  </tbody>
+</table>
