@@ -24,9 +24,24 @@ angular.module('ldapgroupsFilters', [])
     }])
     .filter('dateSynchronized', ['$filter', function($filter) {
         return function(group) {
-            var iconClass = group.dateSynchronized == group.dateModified ? 'icon-ok' : 'icon-exclamation-sign';
-            var date = group.dateSynchronized ? $filter('dateDefault')(group.dateSynchronized) : '<em>no sync</em>';
-            return '<i class="'+iconClass+'"></i> ' + date;
+            var icon,
+                infoClass;
+            if (!group.syncError) {
+                icon = 'icon-question-sign';
+                infoClass = '';
+            } else if (group.syncError != "OK") {
+                icon = 'icon-exclamation-sign';
+                infoClass = 'alert-error';
+            } else if (group.dateModified > group.dateSynchronized) {
+                icon = 'icon-time';
+                infoClass = 'alert-info';
+            } else {
+                icon = 'icon-ok';
+                infoClass = 'alert-success';
+            }
+            var date = group.dateSynchronized ? $filter('dateDefault')(group.dateSynchronized) : '<em>no sync yet</em>';
+            var description = group.syncDescription ? group.syncDescription : "";
+            return '<i class="'+icon+' '+infoClass+'"></i> ' + date + ' <span class="syncDescription '+infoClass+'">'+description+'</span>';
         }
     }])
 ;

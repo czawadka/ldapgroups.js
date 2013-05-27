@@ -57,3 +57,7 @@ body {
 .cursor-click {
     cursor: pointer;
 }
+
+.syncDescription {
+    font-size: 80%;
+}
