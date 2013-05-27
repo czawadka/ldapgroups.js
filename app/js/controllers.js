@@ -6,7 +6,15 @@ angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
     .controller('GroupsCtrl', ['$scope', 'Group', 'MainBreadcrumbs', 'Flash',
         function($scope, Group, MainBreadcrumbs, Flash) {
 
-        $scope.groups = Group.query();
+        $scope.groups = [];
+        Group.query(
+            function(groups) {
+                $scope.groups = groups;
+            },
+            function(response) {
+                Flash.error("Error fetching groups: "+angular.toJson(response));
+            }
+        );
         MainBreadcrumbs.groups();
 
         $scope.addGroup = function() {
@@ -40,7 +48,16 @@ angular.module('ldapgroupsControllers', ['ldapgroupsServices'])
 
         var groupName = $routeParams.groupName;
         groupName = decodeURIComponent(groupName); // decode again because it was double encoded to remove '/' problem
-        $scope.group = Group.get({"groupName": groupName});
+        $scope.group = {name: groupName};
+
+        Group.get({"groupName": groupName},
+            function(group) {
+                $scope.group = group;
+            },
+            function(response) {
+                Flash.error("Error fetching group "+angular.toJson(response));
+            }
+        );
         MainBreadcrumbs.group(groupName);
 
         $scope.addMember = function() {
