@@ -28,7 +28,21 @@
     <tr>
       <td>PUT</td>
       <td>/api/groups/GROUP_NAME</td>
-      <td>Set group. It creates a new one if group doesn't exist or updates members if group already exists</td>
+      <td>
+        <p>
+        Sets group.
+        </p>
+        
+        <p>It creates a new one if group doesn't exist or updates members if group already exists.
+        Example of body for '/api/groups/MyGroup' PUT request could be:
+        <pre>
+          {
+            name: "MyGroup",
+            members: ["login1", "login2"]
+          }
+        </pre>
+        </p>
+      </td>
     </tr>
   </tbody>
 </table>
